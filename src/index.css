@@ -1301,3 +1301,62 @@ body {
 .checklist-select select {
   cursor: pointer;
 }
+
+.analyze-button {
+  position: relative;
+  z-index: 9999;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.analyzer-input-card {
+  position: relative;
+  z-index: 20;
+}
+
+.analyzer-result-card {
+  position: relative;
+  z-index: 15;
+}
+
+.analyze-button {
+  position: relative;
+  z-index: 9999;
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.analyzer-status {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 600;
+}
+
+.analyzer-input-card,
+.analyzer-result-card {
+  position: relative;
+  z-index: 20;
+}
+
+.analyzer-status {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 600;
+}
+
+.analyze-button {
+  position: relative;
+  z-index: 50;
+  pointer-events: auto;
+  cursor: pointer;
+}
