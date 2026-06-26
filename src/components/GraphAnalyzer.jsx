@@ -8,6 +8,8 @@ const KEYBOARD_ROWS = [
 
 export default function GraphAnalyzer({ goHome, goMenu, sendToStudio }) {
   const [inputMode, setInputMode] = useState("equation");
+  const [equation, setEquation] = useState("y = x^2 - 4x + 3");
+  const [result, setResult] = useState(null);
   const [checklist, setChecklist] = useState({
     shape: "",
     direction: "",
@@ -18,8 +20,7 @@ export default function GraphAnalyzer({ goHome, goMenu, sendToStudio }) {
     periodic: "",
     symmetry: ""
   });
-  const [equation, setEquation] = useState("y = x^2 - 4x + 3");
-  const [result, setResult] = useState(null);
+  
   const [imagePreview, setImagePreview] = useState("");
   const [imageMessage, setImageMessage] = useState("");
   const [imageLoading, setImageLoading] = useState(false);
@@ -65,8 +66,36 @@ export default function GraphAnalyzer({ goHome, goMenu, sendToStudio }) {
   }
 
   function handleAnalyzeEquation() {
-    const analyzed = analyzeEquation(equation);
-    setResult(analyzed);
+    try {
+      const analyzed = analyzeEquation(equation);
+      setResult(analyzed);
+    } catch (error) {
+      console.error("Analyze equation error:", error);
+      setResult({
+        status: "error",
+        message: "เกิดข้อผิดพลาดระหว่างวิเคราะห์สมการ กรุณาตรวจสอบรูปแบบสมการ หรือดู Console เพื่อตรวจ error"
+      });
+    }
+  }
+
+  function updateChecklist(key, value) {
+  setChecklist((prev) => ({
+    ...prev,
+    [key]: value
+  }));
+}
+
+  function handleAnalyzeChecklist() {
+    try {
+      const analyzed = analyzeChecklist(checklist);
+      setResult(analyzed);
+    } catch (error) {
+      console.error("Analyze checklist error:", error);
+      setResult({
+        status: "error",
+        message: "เกิดข้อผิดพลาดระหว่างวิเคราะห์ checklist กรุณาตรวจสอบว่า function analyzeChecklist ถูกเพิ่มไว้ครบแล้ว"
+      });
+    }
   }
 
   async function handleImageUpload(event) {
@@ -176,12 +205,14 @@ export default function GraphAnalyzer({ goHome, goMenu, sendToStudio }) {
 
           <div className="mode-switch">
             <button
+              type="button"
               className={inputMode === "equation" ? "mode-button active" : "mode-button"}
               onClick={() => setInputMode("equation")}
             >
               Equation Input
             </button>
             <button
+              type="button"
               className={inputMode === "checklist" ? "mode-button active" : "mode-button"}
               onClick={() => setInputMode("checklist")}
             >
@@ -219,7 +250,7 @@ export default function GraphAnalyzer({ goHome, goMenu, sendToStudio }) {
                   ))}
                 </div>
 
-                <button className="analyze-button" onClick={handleAnalyzeEquation}>
+                <button type="button" className="analyze-button" onClick={handleAnalyzeEquation}>
                   Analyze Graph
                 </button>
               </>
@@ -347,7 +378,7 @@ export default function GraphAnalyzer({ goHome, goMenu, sendToStudio }) {
                     />
                   </div>
 
-                  <button className="analyze-button" onClick={handleAnalyzeChecklist}>
+                  <button type="button" className="analyze-button" onClick={handleAnalyzeChecklist}>
                     Analyze from Checklist
                   </button>
                 </>

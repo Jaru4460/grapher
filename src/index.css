@@ -1281,3 +1281,23 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.analyzer-page,
+.analyzer-layout,
+.analyzer-input-card,
+.analyzer-result-card,
+.mode-switch,
+.mode-button,
+.checklist-select,
+.checklist-select select,
+.analyze-button,
+.equation-box,
+.math-keyboard button {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.checklist-select select {
+  cursor: pointer;
+}
